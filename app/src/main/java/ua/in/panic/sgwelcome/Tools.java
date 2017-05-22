@@ -12,9 +12,7 @@ import java.util.Map;
  */
 
 public class Tools extends Application {
-
     private static Tools instance;
-    private Map<String, String> data = new ArrayMap<>();
 
     public static Tools getInstance() {
         if (null == instance){
@@ -22,19 +20,6 @@ public class Tools extends Application {
         }
         return instance;
     }
-
-    public static void setInstance(Tools instance) {
-        Tools.instance = instance;
-    }
-
-    public String getData(String email) {
-        return data.get(email);
-    }
-
-    public void addData(String email, String pass) {
-        data.put(email, md5(pass));
-    }
-
 
     /**
      * Hashes the password with MD5.

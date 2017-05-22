@@ -1,6 +1,8 @@
 package ua.in.panic.sgwelcome;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -26,6 +28,12 @@ import android.widget.Toast;
 
 public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+    // это файл настроек
+    public static final String APP_PREFERENCES = "sgdata";
+    // почта
+
+    SharedPreferences mData;
+
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Tools tools;
@@ -35,9 +43,9 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tools = Tools.getInstance();
+        mData = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setContentView(R.layout.activity_login_form);
         // Set up the login form.
-        //lasdkjslkdjlskdfj
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -114,9 +122,9 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
             //Если ошибка - остаёмся на стартовом экране в первом поле с ошибкой
             focusView.requestFocus();
             //Проверяем пароль и выводим сообщения об ощибках или переходим на экран №3
-        } else if (tools.getData(email) != null)
+        } else if (mData.contains(email))
             {
-                if (tools.getData(email).equals(tools.md5(password))) {
+                if (mData.getString(email, "").equals(tools.md5(password))) {
                     Intent DetailForm = new Intent(LoginForm.this, DetailForm.class);
                     DetailForm.putExtra("email", email);
                     startActivity(DetailForm);

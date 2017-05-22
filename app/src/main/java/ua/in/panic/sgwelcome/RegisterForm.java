@@ -1,5 +1,7 @@
 package ua.in.panic.sgwelcome;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -25,6 +27,10 @@ import android.widget.Toast;
 
 public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+    // это файл настроек
+    public static final String APP_PREFERENCES = "sgdata";
+
+    SharedPreferences mData;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -36,6 +42,7 @@ public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tools = Tools.getInstance();
+        mData = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         setContentView(R.layout.activity_register_form);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.register_email);
@@ -129,7 +136,7 @@ public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<C
             focusView.requestFocus();
         } else
             {
-            if (tools.getData(email) !=null)
+            if (mData.contains(email))
             {
                 Toast error = Toast.makeText(getApplicationContext(),
                         "This email is already registered! Sign in.", Toast.LENGTH_LONG);
@@ -140,7 +147,9 @@ public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<C
                 focusView.requestFocus();
 
             } else {
-                tools.addData(email, password);
+                SharedPreferences.Editor e = mData.edit();
+                e.putString(email, tools.md5(password));
+                e.apply();
                 Toast RMess = Toast.makeText(getApplicationContext(),
                         "Registration completed!", Toast.LENGTH_SHORT);
                 RMess.setGravity(Gravity.CENTER, 0, 0);
