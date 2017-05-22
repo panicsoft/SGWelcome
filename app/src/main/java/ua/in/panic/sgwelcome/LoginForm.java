@@ -37,6 +37,7 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
         tools = Tools.getInstance();
         setContentView(R.layout.activity_login_form);
         // Set up the login form.
+        //lasdkjslkdjlskdfj
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
