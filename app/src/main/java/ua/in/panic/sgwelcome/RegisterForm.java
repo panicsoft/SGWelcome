@@ -31,8 +31,6 @@ public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<C
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private EditText mRePasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private Tools tools;
 
     @Override
@@ -74,9 +72,6 @@ public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<C
                 attemptRegister();
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
 

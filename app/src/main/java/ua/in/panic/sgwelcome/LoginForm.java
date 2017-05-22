@@ -28,8 +28,6 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private Tools tools;
     private View focusView = null;
 
@@ -74,16 +72,12 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-
     }
 
     private void attemptLogin() {
 
         mEmailView.setError(null);
         mPasswordView.setError(null);
-        String result;
 
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
