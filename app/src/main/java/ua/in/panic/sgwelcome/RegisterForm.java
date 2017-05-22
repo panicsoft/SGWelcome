@@ -160,8 +160,9 @@ public class RegisterForm extends AppCompatActivity implements LoaderCallbacks<C
     }
 
     private boolean isEmailValid(String email) {
-        //Адрес почты должен содержать "эт" (собачку) и быть не менее 6 символов
-        return (email.contains("@") && email.length() > 5);
+        //Адрес почты должен быть не менее 6 символов
+        //Добавили валидацию по паттерну
+        return (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() > 5);
     }
 
     private boolean isPasswordValid(String password) {

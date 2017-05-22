@@ -30,7 +30,8 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
 
     // это файл настроек
     public static final String APP_PREFERENCES = "sgdata";
-    // почта
+    public static final String APP_PREFERENCES_EMAIL = "email";
+    public static final String APP_PREFERENCES_LOGGED_IN = "logged_in";
 
     SharedPreferences mData;
 
@@ -44,6 +45,7 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
         super.onCreate(savedInstanceState);
         tools = Tools.getInstance();
         mData = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
         setContentView(R.layout.activity_login_form);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -80,6 +82,16 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
 
             }
         });
+
+        //Проверяем сохранённую сессию и при наличии таковой открываем экран №3
+        if (mData.contains(APP_PREFERENCES_LOGGED_IN) && mData.getBoolean(APP_PREFERENCES_LOGGED_IN, false)) {
+            Intent DetailForm = new Intent(LoginForm.this, DetailForm.class);
+            DetailForm.putExtra("email", mData.getString(APP_PREFERENCES_EMAIL, ""));
+            startActivity(DetailForm);
+            emptyInputFields();
+            focusView = mEmailView;
+            focusView.requestFocus();
+        }
 
     }
 
@@ -125,6 +137,12 @@ public class LoginForm extends AppCompatActivity implements LoaderCallbacks<Curs
         } else if (mData.contains(email))
             {
                 if (mData.getString(email, "").equals(tools.md5(password))) {
+                    //Пишем сессию при переходе на экран №3
+                    SharedPreferences.Editor e = mData.edit();
+                    e.putString(APP_PREFERENCES_EMAIL, email);
+                    e.putBoolean(APP_PREFERENCES_LOGGED_IN, true);
+                    e.apply();
+                    //Открываем экран №3
                     Intent DetailForm = new Intent(LoginForm.this, DetailForm.class);
                     DetailForm.putExtra("email", email);
                     startActivity(DetailForm);
