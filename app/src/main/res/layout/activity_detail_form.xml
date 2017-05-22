@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    tools:context="ua.in.panic.sgwelcome.DetailForm">
+
+    <LinearLayout
+        android:layout_width="328dp"
+        android:layout_height="455dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:ignore="MissingConstraints" >
+
+
+        <TextView
+            android:id="@+id/WelcomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="18"
+            android:text="Welcome!!!"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteY="26dp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintHorizontal_bias="0.025" />
+
+        <TextView
+            android:id="@+id/EmailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:ems="18"
+            android:text="Email"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="38sp"
+            tools:layout_editor_absoluteY="75dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/exit_button"
+            android:layout_width="328dp"
+            android:layout_marginTop="60dp"
+            android:layout_height="wrap_content"
+            android:text="Exit"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            tools:layout_editor_absoluteY="314dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.714"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
